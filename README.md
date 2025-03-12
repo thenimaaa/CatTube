@@ -1,5 +1,5 @@
 # CatTube
-The "CatTube" extension allows you to change the URLs of YouTube videos to cattube.ir with a single click. This enables you to watch videos without ads and with an IP address from Iran.
+The "CatTube" extension automatically redirects YouTube video pages to cattube.ir when enabled. This provides an ad-free viewing experience along with an Iranian IP address.
 
 Credit: CatTube service provided by https://t.me/rimondl/422, this extension is an independent tool to redirect YouTube links to CatTube.
 
