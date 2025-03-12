@@ -1,28 +1,26 @@
 {
   "manifest_version": 2,
   "name": "CatTube",
-  "version": "1.0.2",
-  "description": "تغییر آدرس ویدیوهای یوتیوب به cattube.ir برای تماشای بدون تبلیغات و با آی‌پی ایران.",
+  "version": "1.1",
+  "description": "This extension redirects YouTube to cattube.ir for ad-free viewing with an Iranian IP address.",
   "permissions": [
     "tabs",
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "browser_action": {
     "default_icon": "icon.png",
-    "default_title": "تغییر به CatTube"
+    "default_title": "CatTube",
+    "default_popup": "popup.html"
   },
   "icons": {
     "48": "icon.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://www.youtube.com/*", "*://youtube.com/*"],
-      "js": ["background.js"]
-    }
-  ],
   "homepage_url": "https://github.com/thenimaaa/CatTube"
 }
