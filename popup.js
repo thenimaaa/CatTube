@@ -6,12 +6,16 @@ function initToggle() {
     } else {
       document.getElementById("toggle").checked = result.enabled;
     }
+  }).catch(() => {
+    document.getElementById("toggle").checked = true;
   });
 }
 
 document.getElementById("toggle").addEventListener("change", function() {
   const newState = this.checked;
-  browser.storage.local.set({ enabled: newState });
+  browser.storage.local.set({ enabled: newState })
+    .catch(() => {});
 });
 
 initToggle();
+
