@@ -1,56 +1,56 @@
 "use strict";
 
-let isEnabled = true;
-
 function initExtensionStatus() {
-  return browser.storage.local.get("enabled").then((result) => {
-    if (typeof result.enabled === "undefined") {
-      isEnabled = true;
-      return browser.storage.local.set({ enabled: true }).then(() => {
-        console.log("Background: No enabled status found. Setting default to true.");
-        return isEnabled;
-      });
-    } else {
-      isEnabled = result.enabled;
-      console.log("Background: Enabled status loaded:", isEnabled);
-      return isEnabled;
-    }
-  });
+  return browser.storage.local.get("enabled")
+    .then((result) => {
+      if (typeof result.enabled === "undefined") {
+        return browser.storage.local.set({ enabled: true })
+          .then(() => true);
+      } else {
+        return result.enabled;
+      }
+    })
+    .catch(() => true);
 }
 
 function checkAndRedirect(tabId, urlString) {
   try {
     const url = new URL(urlString);
-    if (url.hostname.includes("cattube.ir") || !isEnabled) {
+
+    if (url.hostname.includes("cattube.ir")) {
       return;
     }
-    if (
-      (url.hostname === "www.youtube.com" || url.hostname === "youtube.com") &&
-      url.pathname.includes("watch")
-    ) {
-      const newUrl = url.href.replace(/(www\.)?youtube\.com/, "cattube.ir");
-      browser.tabs.update(tabId, { url: newUrl });
+
+    if (url.hostname.includes("youtube.com") && url.pathname.includes("watch")) {
+      const newUrl = url.href.replace(/^(https?:\/\/)(m\.)?(www\.)?youtube\.com/, "$1cattube.ir");
+      browser.tabs.update(tabId, { url: newUrl })
+        .catch(() => {});
     }
   } catch (e) {
-    console.error("Background: Error while checking URL:", e);
   }
 }
 
 initExtensionStatus().then(() => {
   browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.url) {
-      checkAndRedirect(tabId, changeInfo.url);
+      browser.storage.local.get("enabled").then((data) => {
+        if (data.enabled) {
+          checkAndRedirect(tabId, changeInfo.url);
+        }
+      }).catch(() => {});
     }
   });
 
   browser.browserAction.onClicked.addListener((tab) => {
-    checkAndRedirect(tab.id, tab.url);
+    browser.storage.local.get("enabled").then((data) => {
+      if (data.enabled) {
+        checkAndRedirect(tab.id, tab.url);
+      }
+    }).catch(() => {});
   });
 });
 
 browser.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes.enabled) {
-    isEnabled = changes.enabled.newValue;
-    console.log("Background: Enabled status updated:", isEnabled);
   }
 });
