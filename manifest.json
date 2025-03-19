@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "CatTube",
-  "version": "1.1.1",
-  "description": "This extension redirects YouTube videos to cattube.ir for ad-free viewing with an Iranian IP address.",
+  "version": "1.1.5",
+  "description": "This extension redirects YouTube videos to cattube.ir for ad-free watching with an Iranian IP address.",
   "permissions": [
     "tabs",
     "activeTab",
@@ -10,9 +10,10 @@
   ],
   "background": {
     "scripts": [
+      "browser-polyfill.js",
       "background.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "browser_action": {
     "default_icon": "icons/icon.png",
