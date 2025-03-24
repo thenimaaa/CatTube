@@ -16,15 +16,15 @@ function initExtensionStatus() {
 function checkAndRedirect(tabId, urlString) {
   try {
     const url = new URL(urlString);
-
     if (url.hostname.includes("cattube.ir")) {
       return;
     }
-
-    if (url.hostname.includes("youtube.com") && url.pathname.includes("watch")) {
-      const newUrl = url.href.replace(/^(https?:\/\/)(m\.)?(www\.)?youtube\.com/, "$1cattube.ir");
-      browser.tabs.update(tabId, { url: newUrl })
-        .catch(() => {});
+    if (url.hostname.includes("youtube.com")) {
+      if (url.pathname.includes("watch") || url.pathname.includes("shorts")) {
+        const newUrl = url.href.replace(/^(https?:\/\/)(m\.)?(www\.)?youtube\.com/, "$1cattube.ir");
+        browser.tabs.update(tabId, { url: newUrl })
+          .catch(() => {});
+      }
     }
   } catch (e) {
   }
