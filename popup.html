@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,7 +88,6 @@
     input:checked + span:before {
       transform: translateX(30px);
     }
-
     @media (min-width: 769px) {
       .slider {
         width: 80px;
@@ -107,6 +106,25 @@
         transform: translateX(40px);
       }
     }
+    .support-link {
+      margin: 14px 0;
+      font-size: clamp(14px, 4vw, 18px);
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 2px solid #4d3e3e;
+      border-radius: 4px;
+      background-color: #2a2a2a;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .support-link:hover {
+      background-color: #333;
+      border-color: #666;
+    }
+    .support-link:active {
+      background-color: #2a2a2a;
+      border-color: #444;
+    }
   </style>
 </head>
 <body>
@@ -121,6 +139,7 @@
       </label>
       <span class="toggle-text">ON</span>
     </div>
+    <a href="https://t.me/VertexDesignIR" class="support-link" target="_blank">Support</a>
   </div>
   <script src="popup.js"></script>
 </body>
