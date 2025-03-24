@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "CatTube",
-  "version": "1.1.5",
-  "description": "This extension redirects YouTube videos to cattube.ir for ad-free watching with an Iranian IP address.",
+  "version": "1.1.7",
+  "description": "This extension automatically redirects YouTube YouTube Videos, Shorts, and Livestreams to cattube.ir, enabling users to watch content without ads using an Iranian IP address.",
   "permissions": [
     "tabs",
     "activeTab",
